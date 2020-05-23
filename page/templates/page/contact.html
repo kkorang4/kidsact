@@ -1,0 +1,36 @@
+{% extends "page/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    {% if name %}
+        <h2><center>Thanks {{ name }}</center></h2>
+        <small><center>Email was sent successfully</center></small>
+    {% else %}
+        <h1>Contact Us</h1>
+        <div class="dropdown float-right">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+               aria-haspopup="true" aria-expanded="false">
+                Forum
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="dropdown-item" href="https://www.facebook.com" target="_blank">Facebook</a>
+                <a class="dropdown-item" href="https://www.instagram.com" target="_blank">Instagram</a>
+                <a class="dropdown-item" href="https://www.twitter.com" target="_blank">Twitter</a>
+            </div>
+        </div>
+        <br><br>
+        <form method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div class="form-actions">
+                <button class="btn btn-outline-info float-right" type="submit">Send</button>
+            </div>
+        </form>
+        <br><br><br><br>
+        <div>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2192.442774084437!2d174.70759444741054!3d-36.
+            87990207050031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6d0d46e06d50800f%3A0xd8f801d07e48a023!2sUnitec%
+            20Childcare%20Inc!5e0!3m2!1sen!2snz!4v1589855427304!5m2!1sen!2snz"
+                    width="100%" height="400" frameborder="0" style="border:0;"></iframe>
+        </div>
+    {% endif %}
+{% endblock content %}

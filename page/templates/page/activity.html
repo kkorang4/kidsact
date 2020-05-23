@@ -1,0 +1,23 @@
+{% extends "page/base.html" %}
+{% block content %}
+    <div class="row row-cols-1 row-cols-md-3">
+        {% for activity in activities %}
+        {% if activity.available %}
+            <div class="col mb-4">
+                <div class="card card-activity" >
+                    <img src="{{ activity.image_url }}" class="card-img-top image-activity"
+                         alt="image-loaded fail" >
+                    <div class="card-body">
+                        <h5 class="card-title">{{ activity.name }}</h5>
+                        <small>Available with {{ activity.staff }}</small>
+                        <small>from {{ activity.date_open }}</small>
+                    </div>
+                    <a class="btn btn-outline-info" href="{% url 'page-appointment' %}">Book this Activity</a>
+                </div>
+            </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+{% endblock content %}
+
+
