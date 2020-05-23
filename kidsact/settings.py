@@ -23,10 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = config('SECRET_KEY')
+SECRET_KEY = "7v&b9et2na81%*!^k!ji34yn*#*(n+8bm-3vg-gq4$5(lyx&1x"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', default=False, cast=bool)
+DEBUG = False
 
 ALLOWED_HOSTS = ["https://www.agile101.herokuapp.com", "127.0.0.1"]
 
@@ -83,11 +83,11 @@ WSGI_APPLICATION = 'kidsact.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': config('NAME'),
-        'HOST': config('HOST'),
-        'USER': config('USER'),
-        'PASSWORD': config('PASSWORD'),
-        'PORT': config('PORT'),
+        'NAME': 'demo_1',
+        'HOST': 'database-1.cxkvanubemlh.ap-southeast-2.rds.amazonaws.com',
+        'USER': 'kkorang4',
+        'PASSWORD': 'okMPa321',
+        'PORT': '5432',
     }
 }
 db_from_env = dj_database_url.config(conn_max_age=600)
@@ -129,7 +129,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/page/static/'
+STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
