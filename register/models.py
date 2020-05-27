@@ -6,7 +6,7 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default='default.png', upload_to='profile_pics')
+    image = models.ImageField(default='/static/default.png', upload_to='static/profile/')
     child_name = models.CharField(max_length=255, blank=True, null=True)
     child_age = models.IntegerField(blank=True, null=True, validators=[MinValueValidator(5), MaxValueValidator(13)])
     notes = models.CharField(max_length=2083, null=True, blank=True)
