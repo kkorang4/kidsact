@@ -21,9 +21,13 @@
                     <legend class="border-bottom mb-4">Profile Info</legend>
                     {{ user_form|crispy }}
                     {{ profile_form|crispy }}
+                    {{ child_form|crispy }}
                 </fieldset>
                 <div class="form-group">
                     <button class="btn btn-outline-info" type="submit">Save</button>
+                    <h2>{{ user.child_name }}</h2>
+                    <h2>{{ child.child_age }}</h2>
+                    <h2>{{ child.notes }}</h2>
                 </div>
             </form>
         </div>
