@@ -43,9 +43,8 @@ def contact(request, send_to="kima11@myunitec.ac.nz"):
 
 @login_required
 def appointment(request):
-    app_form = AppointmentForm(instance=request.user)
-
+    appForm = AppointmentForm()
     context = {
-        'app_form': app_form
+        'appForm': appForm
     }
     return render(request, 'page/appointment.html', context)

@@ -4,8 +4,12 @@ from django.utils import timezone
 from django.contrib.auth.models import User
 from django.forms.widgets import SelectDateWidget
 from register import models as pmodels
-import datetime
 from django.core.validators import MaxValueValidator, MinValueValidator
+
+TIME_CHOICE = [
+        ('MORNING', '8am-12am'),
+        ('AFTERNOON', '1pm-5pm')
+    ]
 
 
 class Activity(models.Model):
@@ -13,10 +17,14 @@ class Activity(models.Model):
     min_age = models.IntegerField(default=5, validators=[MinValueValidator(5), MaxValueValidator(13)])
     price = models.FloatField(default=0.00, validators=[MinValueValidator(0), MaxValueValidator(500)])
     staff = models.ForeignKey(User, on_delete=models.CASCADE)
+    time = models.CharField(choices=TIME_CHOICE, default="MORNING", max_length=10)
     available = models.BooleanField(default=True)
     image_url = models.CharField(max_length=2083)
     date_open = models.DateField(default=timezone.now)
     max_capacity = models.IntegerField(default=12, validators=[MinValueValidator(6), MaxValueValidator(40)])
+
+    def __str__(self):
+        return f'{self.name}'
 
 
 class ContactForm(forms.Form):
@@ -26,8 +34,12 @@ class ContactForm(forms.Form):
 
 
 class Appointment(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    profile = models.OneToOneField(pmodels.Profile, on_delete=models.CASCADE)
+    parent = models.ForeignKey(User, on_delete=models.CASCADE, related_name='parentR', null=True)
+    child_name = models.ForeignKey(pmodels.Child, on_delete=models.CASCADE, default='')
+    act_name = models.ForeignKey(Activity, to_field='name', db_column='name'
+                                 , on_delete=models.CASCADE, related_name='nameR', default='')
+    act_date = models.DateField(default=timezone.now)
+    act_time = models.CharField(choices=TIME_CHOICE, default='', max_length=10)
 
     def __str__(self):
-        return f'{self.user.username} Appointment'
+        return f'{self.parent.username}\'s Appointment'
