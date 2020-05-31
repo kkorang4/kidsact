@@ -7,7 +7,7 @@ class ProfileAdmin(admin.ModelAdmin):
 
 
 class ChildAdmin(admin.ModelAdmin):
-    list_display = ('user', 'child_name', 'child_age', 'notes')
+    list_display = ('parent', 'child_name', 'child_age', 'notes')
 
 
 admin.site.register(Profile, ProfileAdmin)

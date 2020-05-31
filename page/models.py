@@ -26,7 +26,7 @@ class ContactForm(forms.Form):
 
 
 class Appointment(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     profile = models.OneToOneField(pmodels.Profile, on_delete=models.CASCADE)
 
     def __str__(self):

@@ -23,13 +23,10 @@ class Profile(models.Model):
 
 
 class Child(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    parent = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='children')
     child_name = models.CharField(max_length=255, blank=True, null=True)
     child_age = models.IntegerField(blank=True, null=True, validators=[MinValueValidator(5), MaxValueValidator(13)])
-    notes = models.CharField(max_length=2083, null=True, blank=True)
+    notes = models.CharField(max_length=2083, null=True, blank=True, default="")
 
     def __str__(self):
-        return f'{self.user.username} Profile'
-
-    def save(self, *args, **kwargs):
-        super(Child, self).save(*args, **kwargs)
+        return self.child_name

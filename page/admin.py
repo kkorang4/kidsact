@@ -8,3 +8,4 @@ class ActivityAdmin(admin.ModelAdmin):
 
 admin.site.register(Activity, ActivityAdmin)
 admin.site.register(Appointment)
+admin.site.site_header = 'BTC Admin'
