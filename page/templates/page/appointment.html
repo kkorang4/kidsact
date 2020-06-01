@@ -1,12 +1,6 @@
 {% extends "page/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    {% if name %}
-        <center>
-            <h2>Thanks {{ name }}</h2>
-            <small>Appointment was made for you successfully</small>
-        </center>
-    {% else %}
         <div class="content-section">
             <div class="media">
                 <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
@@ -26,5 +20,4 @@
                 </div>
             </form>
         </div>
-    {% endif %}
 {% endblock content %}

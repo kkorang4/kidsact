@@ -76,6 +76,9 @@ def addchild(request, pk):
         if child_form.is_valid():
             formset.save()
             return redirect('/profile/')
+        else:
+            messages.error(request, 'You must enter a child\'s name')
+            messages.error(request, 'You can only register a child age from 5 - 13')
     context = {'child_form': formset,
                'children': children}
     return render(request, 'register/childform.html', context)

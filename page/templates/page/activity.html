@@ -1,5 +1,12 @@
 {% extends "page/base.html" %}
 {% block content %}
+    {% if user.is_staff %}
+        <a class="btn btn-outline-info" href="/admin/page/activity">
+            Manage Activity
+        </a>
+        <br>
+        <br>
+    {% endif %}
     <div class="row row-cols-1 row-cols-md-3">
         {% for activity in activities %}
         {% if activity.available %}
@@ -9,10 +16,15 @@
                          alt="image-loaded fail" >
                     <div class="card-body">
                         <h5 class="card-title">{{ activity.name }}</h5>
-                        <small>Available with {{ activity.staff }}</small>
-                        <small>from {{ activity.date_open }}</small>
+                        <small>
+                            Available with
+                            <strong>{{ activity.staff.first_name }} {{ activity.staff.last_name }}</strong>
+                            from {{ activity.date_open }}
+                        </small>
                     </div>
-                    <a class="btn btn-outline-info" href="{% url 'page-appointment' %}">Book this Activity</a>
+                    <a class="btn btn-outline-info" href="{% url 'page-appointment' pk=user.id %}">
+                        Book an Activity
+                    </a>
                 </div>
             </div>
         {% endif %}

@@ -1,6 +1,7 @@
 from django.db import models
 from django import forms
 from django.utils import timezone
+from datetime import date
 from django.contrib.auth.models import User
 from django.forms.widgets import SelectDateWidget
 from register import models as pmodels
@@ -28,18 +29,14 @@ class Activity(models.Model):
 
 
 class ContactForm(forms.Form):
-    email_address = forms.EmailField(required=True)
     name = forms.CharField(required=True)
     query = forms.CharField(widget=forms.Textarea, required=True)
 
 
 class Appointment(models.Model):
     parent = models.ForeignKey(User, on_delete=models.CASCADE, related_name='parentR', null=True)
-    child_name = models.ForeignKey(pmodels.Child, on_delete=models.CASCADE, default='')
-    act_name = models.ForeignKey(Activity, to_field='name', db_column='name'
-                                 , on_delete=models.CASCADE, related_name='nameR', default='')
-    act_date = models.DateField(default=timezone.now)
-    act_time = models.CharField(choices=TIME_CHOICE, default='', max_length=10)
-
-    def __str__(self):
-        return f'{self.parent.username}\'s Appointment'
+    child_name = models.ForeignKey(pmodels.Child, on_delete=models.CASCADE, default='', related_name='childR')
+    activity_name = models.ForeignKey(Activity, to_field='name', db_column='name',
+                                      on_delete=models.CASCADE, related_name='nameR', default='')
+    activity_date = models.DateField(default=date.today)
+    activity_time = models.CharField(choices=TIME_CHOICE, default='', max_length=10)

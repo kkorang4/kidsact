@@ -24,8 +24,8 @@ class Profile(models.Model):
 
 class Child(models.Model):
     parent = models.ForeignKey(User, null=True, on_delete=models.SET_NULL, related_name='children')
-    child_name = models.CharField(max_length=255, blank=True, null=True)
-    child_age = models.IntegerField(blank=True, null=True, validators=[MinValueValidator(5), MaxValueValidator(13)])
+    child_name = models.CharField(max_length=255, blank=False)
+    child_age = models.IntegerField(validators=[MinValueValidator(5), MaxValueValidator(13)])
     notes = models.CharField(max_length=2083, null=True, blank=True, default="")
 
     def __str__(self):

@@ -7,7 +7,7 @@ class ActivityAdmin(admin.ModelAdmin):
 
 
 class AppointmentAdmin(admin.ModelAdmin):
-    list_display = ('parent', 'child_name', 'act_name')
+    list_display = ('parent', 'child_name', 'activity_name')
 
 
 admin.site.register(Activity, ActivityAdmin)
